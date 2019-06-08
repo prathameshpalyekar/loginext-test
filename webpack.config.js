@@ -29,6 +29,7 @@ module.exports = (env, argv) => {
                 components: path.resolve(__dirname, 'app/components/'),
                 assets: path.resolve(__dirname, 'app/assets/'),
                 web: path.resolve(__dirname, 'app/web/'),
+                database: path.resolve(__dirname, 'app/Database/'),
             },
             extensions: ['*', '.js', '.jsx']
         },
