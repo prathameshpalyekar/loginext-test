@@ -5,8 +5,19 @@ class Location extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loadIndex: 10,
         };
         this.onChange = this.onChange.bind(this);
+        this.loadMore = this.loadMore.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { searchString } = nextProps;
+        if (this.props.searchString !== searchString) {
+            this.setState({
+                loadIndex: 10
+            });
+        }
     }
 
     onChange(event) {
@@ -14,10 +25,17 @@ class Location extends Component {
         this.props.selectLocations(value);
     }
 
+    loadMore() {
+        this.setState({
+            loadIndex: this.state.loadIndex + 10
+        });
+    }
+
     render() {
         const { data, selectLocations, selectedLocations, searchString } = this.props;
         const noResult = searchString && selectedLocations.length === 0;
         const displayData = selectedLocations.length > 0 ? selectedLocations : data;
+        const { loadIndex } = this.state;
 
         return (
             <div className="location-dashboard">
@@ -29,7 +47,7 @@ class Location extends Component {
                         No Results found
                     </div> :
                     <div className="-result">
-                        {displayData.map((locationNode) => {
+                        {displayData.slice(0, loadIndex).map((locationNode) => {
                             const { id, pincode, location } = locationNode;
                             return (
                                 <div key={id} className="-location">
@@ -38,6 +56,11 @@ class Location extends Component {
                                 </div>
                             )
                         })}
+                        {loadIndex < displayData.length &&
+                            <div className="-load-more">
+                                <button className="btn btn-primary -load" onClick={this.loadMore}>Load More</button>
+                            </div>
+                        }
                     </div>
                 }
             </div>

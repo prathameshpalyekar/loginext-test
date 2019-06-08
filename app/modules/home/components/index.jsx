@@ -26,10 +26,14 @@ class Home extends Component {
     render() {
         const { data } = this.props;
         const { selectedLocations, searchString } = this.state;
+        const displayData = selectedLocations.length > 0 ? selectedLocations : searchString ? [] : data;
 
         return (
             <div className="home-dashboard">
                 <div className="row">
+                    <div className="col-sm-6">
+                        <WorldMap data={displayData}/>
+                    </div>
                     <div className="col-sm-6">
                         <Location
                             data={data}
@@ -37,9 +41,6 @@ class Home extends Component {
                             selectedLocations={selectedLocations}
                             searchString={searchString}
                         />
-                    </div>
-                    <div className="col-sm-6">
-                        <WorldMap />
                     </div>
                 </div>
             </div>
