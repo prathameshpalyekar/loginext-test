@@ -1,0 +1,33 @@
+.location-dashboard {
+    margin: 15px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    .-search-container {
+        padding: 10px;
+        .-search-bar {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+    .-result {
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        .-location {
+            padding: 5px;
+            border-bottom: 1px solid gray;
+            display: flex;
+            flex-direction: row;
+            &:last-child {
+                border: 0px;
+            }
+            .-city {
+                flex: 1;
+            }
+            .-pincode {
+                flex: 1;
+            }
+        }
+    }
+}
